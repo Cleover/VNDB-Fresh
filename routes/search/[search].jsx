@@ -1,4 +1,5 @@
 import { getVisualNovelData } from "../../utils/vn.js";
+import Cover from "../../components/Cover.jsx";
 
 export const handler = {
   async GET(_, ctx) {
@@ -10,6 +11,9 @@ export const handler = {
       [
         "id",
         "title",
+        "image.url",
+        "image.sexual",
+        "image.violence",
       ].join(", "),
     );
 
@@ -24,11 +28,7 @@ export default function Page({ data }) {
 
   return (
     <div className="grid grid-cols-1 gap-4">
-      {data.results.map((vn) => (
-        <div key={vn.id} className="flex flex-row">
-          <a href={`../vn/${vn.id}`} className="mr-4">{vn.title}</a>
-        </div>
-      ))}
+      <Cover data={data} />
     </div>
   );
 }
